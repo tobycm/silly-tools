@@ -100,6 +100,32 @@ export default new Elysia({ prefix: "/paste" })
     },
     { params: "ID", body: "Paste" }
   )
+  .put(
+    "/:id",
+    async ({ params, body, set }) => {
+      const id = params.id;
+      const content = typeof body === "string" ? body : body.content;
+
+      if (!(await publicPastes.has(id)) && !(await privatePastes.has(id))) {
+        set.status = 404;
+        return { error: "Paste not found" };
+      }
+
+      if (await publicPastes.has(id)) {
+        publicPastes.put(id, content);
+      } else {
+        privatePastes.put(id, content);
+      }
+
+      return { id };
+    },
+    {
+      params: t.Object({
+        id: t.String({ pattern: "^[a-zA-Z0-9-]+$", minLength: 32, maxLength: 128 }),
+      }),
+      body: "Paste",
+    }
+  )
   .delete(
     "/:id",
     async ({ params, set }) => {
