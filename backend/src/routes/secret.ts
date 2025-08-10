@@ -18,7 +18,7 @@ setInterval(() => {
 
 setInterval(() => {
   commitAndPushChanges(PUBLIC_GIT_REPO_PATH, `Invalidate secrets at ${new Date().toISOString()}`);
-}, 1000 * 60 * 5); // rare race condition, but should be fine
+}, 1000 * 60 * 60); // rare race condition, but should be fine
 
 async function addSecret(secret: string) {
   const now = new Date();
