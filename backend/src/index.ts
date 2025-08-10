@@ -2,6 +2,7 @@ import cors from "@elysiajs/cors";
 import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import ip from "./routes/ip";
+import paste from "./routes/paste";
 import secret from "./routes/secret";
 
 const app = new Elysia()
@@ -28,7 +29,8 @@ const app = new Elysia()
 
   .use(ip)
   .use(secret)
+  .use(paste)
 
   .listen(3000);
 
-console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
+console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);
