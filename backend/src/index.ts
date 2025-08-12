@@ -1,6 +1,7 @@
 import cors from "@elysiajs/cors";
 import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
+import generate from "./routes/generate";
 import ip from "./routes/ip";
 import paste from "./routes/paste";
 import secret from "./routes/secret";
@@ -30,6 +31,7 @@ const app = new Elysia()
   .use(ip)
   .use(secret)
   .use(paste)
+  .use(generate)
 
   .listen(3000);
 
