@@ -29,16 +29,6 @@ export default new Elysia({ prefix: "/generate" })
       query: "UUIDv7Options",
     }
   )
-  .post(
-    "/",
-    ({ body }) => {
-      const { encoding, timestamp } = body;
-      return randomUUIDv7(encoding === "url" ? "base64url" : encoding, timestamp);
-    },
-    {
-      body: "UUIDv7Options",
-    }
-  )
 
   .get(
     "/uuid",
